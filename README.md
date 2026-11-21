@@ -1,23 +1,37 @@
-# AIJIU · iOS + Android
+# 星枢 StarHub
 
-![AIJIU](AIJIU-icon-preview.png)
+聚合多个 AI 服务商的原生 iPhone 与 Android 客户端，默认跟随系统外观，支持自定义模型与 API、模型图标联动、云端推荐目录和公告同步。
 
-GUJIU 的闭源 AI 客户端，版本1.1。原 AI Hub 更名为 AIJIU，采用原创 A/J 交叠标识。
+![StarHub](StarHub-icon.png)
 
-- **iOS 16+**：原生 SwiftUI，IPA 用于兼容设备安装；保留原 bundle 与 Keychain 标识，以支持原配置延续。
-- **Android 8+**：原生 Java，提供测试签名 APK。
-- 聊天首页、模型 Logo 联动、默认跟随系统外观、多模型自定义配置、三种 API 协议、设备安全存储密钥。
-- 每日检查 OpenRouter 免费目录，支持手动刷新与缓存；系统后台执行时间不保证准点。
-- 推荐旗舰：DeepSeek V4 Pro、Qwen3.8-Max、GLM-5.3，均为需要个人 Key 的按量模型。
-- 国内免费 API 预设：GLM-4.7-Flash、GLM-4.6V-Flash，按2026-11-21官方价格核实，仍需个人 Key，额度与可用性以官方为准。
-- “免 Key 官方体验”通过外部浏览器打开 DeepSeek、千问、智谱清言官方网站，可能需要登录；与 App 内 API 聊天独立。
+## 下载安装
 
-## 构建
+请在 [Releases 下载最新版](https://github.com/gujiu520/aihub-ios/releases/latest)。
 
-`AIJIU-source.zip` 包含完整原生 iOS、Android 工程。私有仓库工作流 **Build AIJIU iOS and Android** 解压后分别在 macOS 和 Ubuntu 编译，生成 `AIJIU-iOS-IPA` 与 `AIJIU-Android-APK` 构建产物。
+- Android：下载 `StarHub-Android-1.2.0.apk`，Android 8.0 或以上。从此版本开始使用固定的星枢发布签名，尚未进行商店发布验证。早期 AIJIU 1.1 测试包使用另一临时签名，不能保证直接覆盖升级。
+- iPhone：下载 `StarHub-1.2.0-arm64-unsigned.ipa`，App 最低要求 iOS 16。安装环境需要自行满足相应要求；未进行真机安装验证。
+- 同一平台覆盖升级时请保留原应用，不要先卸载。安装环境和签名须兼容，否则不能保证保留本机配置。
 
-不用把 API Key 写进代码或 GitHub Secrets，用户在手机 App 内自行配置。没有内置共享 Key，也没有将付费模型伪装为免费。
+## 无需重装的数据同步
 
-GUJIU · gujiu520@proton.me · QQ 401738182 · 微信 V909800
+从 1.2.0 同步版开始，推荐模型、公告和版本信息可以云端更新。首次需安装含同步功能的新版一次；之后启用“云端同步”时，打开／返回 App 会在距上次成功同步一小时后检查，也可以在设置里立即同步。
 
-Copyright © 2026 GUJIU. All rights reserved.
+- 目录：本仓库 `catalog.json`，只含公开推荐信息，不含 API Key。
+- 断网或数据无效时保留上次有效目录；没有缓存时使用随 App 自带的预设。
+- 云端目录不会改写已保存的自定义接口、密钥或当前模型。
+- 原生界面与代码功能改动仍需安装新版本；此功能不执行远程代码，也不静默安装软件。
+- 当前不提供聊天内容的云同步；聊天为当前会话内容，不承诺重启后的记录留存。
+
+免费模型目录由 OpenRouter 单独维护，支持到期检查与手动刷新；手机系统后台任务不能保证准点执行。免费 API 仍可能要求个人 Key、账号权限和额度。免填 Key 官方体验入口打开服务商官网，可能要求登录。
+
+## 源码、构建与验证
+
+本仓库已按开发者要求公开。完整 iOS 与 Android 工程见根目录 `StarHub-source.zip`；内部目录保留 AIJIU 名称以减少升级迁移影响。旧的 AIHub／AIJIU 源码归档用于保留版本历史。
+
+安装包通过 GitHub Actions 编译和打包，构建前运行 Swift 目录解析测试与 Android JVM 单元测试。云端构建成功不等于已完成真机或真实服务商 Key 测试。此应用不包含开发者共享 API 凭据或免费额度代理服务。
+
+安卓签名私钥仅供构建使用，不在源码归档中。公开签名证书 SHA-256：`1B4B154E2C00A943206163AA585CDB4C0B2BA5BDE9F8788C5754D4B6F12B6BE4`。后续发布必须保留同一签名身份；源码公开不代表私钥公开。
+
+开发者：GUJIU。邮箱 gujiu520@proton.me · QQ 401738182 · 微信 V909800。
+
+Copyright © 2026 GUJIU. All rights reserved. 公开源码不等于自动授予第三方使用、修改或再分发许可；本次未替开发者选择开源许可证。

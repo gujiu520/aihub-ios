@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "updatedAt": "2026-11-21T14:00:00Z",
+  "announcement": "欢迎使用星枢 StarHub 云端同步版。推荐模型与公告可自动同步；已保存的接口和密钥不会被云端覆盖。原生功能升级仍需安装新版。",
+  "latestVersion": "1.2.0",
+  "releaseURL": "https://github.com/gujiu520/aihub-ios/releases/latest",
+  "presets": [
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek V4 Pro",
+      "modelID": "deepseek-v4-pro",
+      "baseURL": "https://api.deepseek.com/v1",
+      "protocol": "openAI",
+      "logo": "deepseek",
+      "provider": "DeepSeek",
+      "category": "large",
+      "requiresKey": true,
+      "freeCatalog": false,
+      "note": "旗舰大模型 · 按量付费 · 需 DeepSeek Key。服务商模型权限与价格以官方为准。"
+    },
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8-Max",
+      "modelID": "qwen3.8-max",
+      "baseURL": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "protocol": "openAI",
+      "logo": "qwen",
+      "provider": "千问 / 阿里云",
+      "category": "large",
+      "requiresKey": true,
+      "freeCatalog": false,
+      "note": "2.4T MoE 旗舰 · 按量付费 · 需匹配地域的阿里云 Key；可修改工作空间接口地址。"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "modelID": "glm-5.3",
+      "baseURL": "https://open.bigmodel.cn/api/paas/v4",
+      "protocol": "openAI",
+      "logo": "glm",
+      "provider": "智谱",
+      "category": "large",
+      "requiresKey": true,
+      "freeCatalog": false,
+      "note": "旗舰推理模型 · 按量付费 · 需智谱 Key。使用标准 API，不使用 Coding Plan 端点。"
+    },
+    {
+      "id": "glm-4.7-flash",
+      "name": "GLM-4.7-Flash",
+      "modelID": "glm-4.7-flash",
+      "baseURL": "https://open.bigmodel.cn/api/paas/v4",
+      "protocol": "openAI",
+      "logo": "glm",
+      "provider": "智谱",
+      "category": "domestic-free",
+      "requiresKey": true,
+      "freeCatalog": false,
+      "note": "官方当前标价免费 · 需个人智谱 Key · 受账号权限及限流约束；价格核实于 2026-11-21。"
+    },
+    {
+      "id": "glm-4.6v-flash",
+      "name": "GLM-4.6V-Flash",
+      "modelID": "glm-4.6v-flash",
+      "baseURL": "https://open.bigmodel.cn/api/paas/v4",
+      "protocol": "openAI",
+      "logo": "glm",
+      "provider": "智谱",
+      "category": "domestic-free",
+      "requiresKey": true,
+      "freeCatalog": false,
+      "note": "官方当前标价免费 · 需个人智谱 Key。本版提供文本聊天，未实现图片上传；价格核实于 2026-11-21。"
+    }
+  ]
+}
