@@ -1,0 +1,28 @@
+name: Build iOS IPA
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Extract private iOS source
+        run: unzip -q AIHub-iOS-source.zip -d source
+      - name: Compile arm64 iPhone app and package IPA
+        run: bash source/AIHub-iOS/build-ipa.sh
+      - name: Upload compiler diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v7.0.0
+        with:
+          name: Xcode-diagnostics
+          path: source/AIHub-iOS/build/Logs
+          if-no-files-found: ignore
+      - name: Upload IPA
+        uses: actions/upload-artifact@v7.0.0
+        with:
+          name: AIHub-IPA
+          path: source/AIHub-iOS/build/AIHub-1.0.0-arm64-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 14
