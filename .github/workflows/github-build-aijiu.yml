@@ -20,7 +20,7 @@ jobs:
       - uses: actions/upload-artifact@v7.0.0
         with:
           name: StarHub-iOS-IPA
-          path: source/AIJIU-iOS/build/StarHub-1.2.0-arm64-unsigned.ipa
+          path: source/AIJIU-iOS/build/StarHub-1.2.1-arm64-unsigned.ipa
           if-no-files-found: error
           retention-days: 14
   android:
@@ -57,15 +57,15 @@ jobs:
           grep -Fi 'Signer #1 certificate SHA-256 digest: 1B4B154E2C00A943206163AA585CDB4C0B2BA5BDE9F8788C5754D4B6F12B6BE4' apk-signature.txt
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" > apk-badging.txt
           sed -n '1,6p' apk-badging.txt
-          cp "$APK" StarHub-Android-1.2.0.apk
-          sha256sum StarHub-Android-1.2.0.apk
+          cp "$APK" StarHub-Android-1.2.1.apk
+          sha256sum StarHub-Android-1.2.1.apk
       - name: Remove runner copy of signing identity
         if: always()
         run: rm -f "$RUNNER_TEMP/starhub-release.p12"
       - uses: actions/upload-artifact@v7.0.0
         with:
           name: StarHub-Android-APK
-          path: StarHub-Android-1.2.0.apk
+          path: StarHub-Android-1.2.1.apk
           if-no-files-found: error
           retention-days: 14
   publish:
@@ -84,13 +84,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p dist
-          cp packages/StarHub-iOS-IPA/StarHub-1.2.0-arm64-unsigned.ipa dist/
-          cp packages/StarHub-Android-APK/StarHub-Android-1.2.0.apk dist/
+          cp packages/StarHub-iOS-IPA/StarHub-1.2.1-arm64-unsigned.ipa dist/
+          cp packages/StarHub-Android-APK/StarHub-Android-1.2.1.apk dist/
           (cd dist && sha256sum *.ipa *.apk > SHA256SUMS.txt)
-          if gh release view v1.2.0 >/dev/null 2>&1; then
-            gh release upload v1.2.0 dist/* --clobber
-            gh release edit v1.2.0 --title '星枢 StarHub 1.2.0 · 云端同步版' --notes-file release-notes.md --latest
+          if gh release view v1.2.1 >/dev/null 2>&1; then
+            gh release upload v1.2.1 dist/* --clobber
+            gh release edit v1.2.1 --title '星枢 StarHub 1.2.1 · 供应商目录更新' --notes-file release-notes.md --latest
           else
-            gh release create v1.2.0 dist/* --target "$GITHUB_SHA" --title '星枢 StarHub 1.2.0 · 云端同步版' --notes-file release-notes.md --latest
+            gh release create v1.2.1 dist/* --target "$GITHUB_SHA" --title '星枢 StarHub 1.2.1 · 供应商目录更新' --notes-file release-notes.md --latest
           fi
-          gh release view v1.2.0 --json url,assets
+          gh release view v1.2.1 --json url,assets
