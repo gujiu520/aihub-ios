@@ -1,0 +1,51 @@
+name: Build AIJIU iOS and Android
+on:
+  workflow_dispatch:
+jobs:
+  ios:
+    runs-on: macos-15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Extract AIJIU source
+        run: unzip -q AIJIU-source.zip -d source
+      - name: Compile iOS 16 arm64 and package IPA
+        run: bash source/AIJIU-iOS/build-ipa.sh
+      - uses: actions/upload-artifact@v7.0.0
+        with:
+          name: AIJIU-iOS-IPA
+          path: source/AIJIU-iOS/build/AIJIU-1.1.0-arm64-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 14
+  android:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Extract AIJIU source
+        run: unzip -q AIJIU-source.zip -d source
+      - name: Use JDK 17
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME_17_X64" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME_17_X64/bin" >> "$GITHUB_PATH"
+      - uses: gradle/actions/setup-gradle@v6.4.0
+        with:
+          gradle-version: '8.11.1'
+      - name: Compile signed Android test APK
+        run: gradle --project-dir source/AIJIU-Android :app:assembleDebug --no-daemon --stacktrace
+      - name: Verify APK signature and version
+        run: |
+          APK=source/AIJIU-Android/app/build/outputs/apk/debug/app-debug.apk
+          test -s "$APK"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose "$APK"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$APK" | head -n 6
+          cp "$APK" AIJIU-Android-1.1.0-test.apk
+          sha256sum AIJIU-Android-1.1.0-test.apk
+      - uses: actions/upload-artifact@v7.0.0
+        with:
+          name: AIJIU-Android-APK
+          path: AIJIU-Android-1.1.0-test.apk
+          if-no-files-found: error
+          retention-days: 14
