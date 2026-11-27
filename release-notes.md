@@ -1,10 +1,8 @@
-# 星枢 StarHub 1.2.1
+# 星枢 StarHub 1.2.2
 
-- 推荐目录新增百度千帆、百灵、BytePlus、火山引擎、Kimi、LongCat、Meta Model API、MiniMax、Mistral AI、OpenAI API 等供应商，增加 DeepSeek Flash 和讯飞星辰 MaaS。API 预设按服务商要求使用个人 Key。
-- 新增 GitHub Copilot、OpenAI Official 和 xAI Grok 的官方网页入口，以及 Astron Coding Plan 套餐文档。账号登录由各自网站处理。
-- 聊天首页点模型名即可切换，当前模型带勾选标记。重开会恢复上次的会话和模型。可新建聊天，从历史记录找回旧会话。
-- 输入框可选择图片和文档。发送时由当前模型处理，附件能力取决于服务商及模型。
-- 可创建技能或导入 SKILL.md。支持工具调用的 OpenAI 兼容模型可在一轮任务中列出附件、读取文档并生成可导出的文件。
-- Android 使用星枢的固定发布签名。iOS 下载为 arm64 未签名 IPA。账号权限、价格及额度以各服务商为准。
+- 「供应商与模型」内置 111 个供应商及平台入口；每家只显示一行，点进详情再选择模型。支持按公司名、网址和模型 ID 搜索。
+- 增加 OpenAI、百度千帆、MiniMax、Mistral、火山方舟、Claude 和 Gemini 的模型选项。未核实 API 的目录项提供官网或手动配置，使用个人 Key 前请核对服务商的官方文档。
+- 「技能」内置 8 种工作方式，包括文件助手、代码审查、故障排查、实现计划和数据整理。保留自定义技能与 SKILL.md 导入。
+- 保留聊天记录、上次选中的模型和附件入口。Android 为固定签名 APK；iPhone 为 arm64 未签名 IPA。
 
-云目录同步可在设置中手动刷新。首页新功能需要安装本版。共享免 Key 通道尚未部署。
+目录参考 [CC Switch v4.0.38](https://github.com/farion1231/cc-switch/blob/v4.0.38/src/config/codexProviderPresets.ts)，合并了同公司的地区和套餐；保留 MIT 署名。服务商模型、价格及权限以官方为准。
